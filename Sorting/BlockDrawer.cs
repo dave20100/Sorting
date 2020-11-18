@@ -8,32 +8,14 @@ namespace Sorting
 {
     class BlockDrawer : Drawer
     {
-        Canvas canvas;
+        public BlockDrawer(Canvas canvas) : base(canvas) { }
 
-        public BlockDrawer(Canvas canvas)
+        protected override Shape CreateShape(List<int> array, int index)
         {
-            this.canvas = canvas;
-            SortingAlgorithms.OnChange += SortingAlgorithms_Notify;
-        }
-
-
-        public void Draw(List<int> array) {
-            canvas.Children.Clear();
             double width = canvas.ActualWidth / array.Count;
-            for (int i = 0; i < array.Count; i++)
-            {
-                Shape s = ShapeFactory.GetShape("rectangle", width, ((double)array[i] / array.Max()) * canvas.ActualHeight);
-                
-                Canvas.SetLeft(s, i * width);
-                Canvas.SetBottom(s, 0);
-
-                canvas.Children.Add(s);
-            }
-        }
-
-        private void SortingAlgorithms_Notify(object sender, ElementsEventArgs e)
-        {
-            Draw(e.Elements);
+            Shape s = ShapeFactory.GetShape("rectangle", width, ((double)array[index] / array.Max()) * canvas.ActualHeight);
+            this.SetShapeCoordinates(s, index * width, 0);
+            return s;
         }
     }
 }
