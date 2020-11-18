@@ -16,7 +16,7 @@ namespace Sorting
         public MainWindow()
         {
             InitializeComponent();
-            d = new BlockDrawer(canvas);
+            d = new CircleDrawer(canvas);
             s = new Sorter();
             SortingAlgorithms.OnChange += SortingAlgorithms_OnChange;
         }
@@ -36,7 +36,7 @@ namespace Sorting
             for (int i = 0; i < numberOfElements; i++)
             {
                 Random r = new Random();
-                t.Add(r.Next(0, 1000));
+                t.Add(r.Next(1, 200));
             }
             await s.Sort(t);
         }

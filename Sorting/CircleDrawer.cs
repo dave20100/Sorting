@@ -1,31 +1,30 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Windows.Controls;
-//using System.Windows.Media;
-//using System.Windows.Shapes;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
-//namespace Sorting
-//{
-//    class CircleDrawer : Drawer
-//    {
+namespace Sorting
+{
+    class CircleDrawer : Drawer
+    {
 
-//        public CircleDrawer(Canvas canvas): base(canvas) {}
+        public CircleDrawer(Canvas canvas) : base(canvas) { }
 
-//        public override void Draw(List<int> array)
-//        {
-//            canvas.Children.Clear();
-//            double width = canvas.ActualWidth / array.Count;
-//            for (int i = 0; i < array.Count; i++)
-//            {
-//                Shape s = ShapeFactory.GetShape("ellipse", width, ((double)array[i] / array.Max()) * canvas.ActualHeight);
-
-//                Canvas.SetLeft(s, i * width);
-//                Canvas.SetBottom(s, 0);
-
-//                canvas.Children.Add(s);
-//            }
-//        }
-//    }
-//}
+        protected override Shape CreateShape(List<int> array, int index)
+        {
+            double step = canvas.ActualWidth/ array.Count;
+            double r = 10;
+            Shape s = ShapeFactory.GetShape("ellipse", r, r);
+            double y = array[index] * 1.0 / array.Max() * canvas.ActualHeight - r;
+            if(y < 0)
+            {
+                y = 0;
+            }
+            SetShapeCoordinates(s, step * index, y) ;
+            return s;
+        }
+    }
+}

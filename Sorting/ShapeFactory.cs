@@ -15,6 +15,10 @@ namespace Sorting
             {
                 shape = new Rectangle();
             }
+            else if (name == "ellipse")
+            {
+                shape = new Ellipse();
+            }
             else
             {
                 return null;
